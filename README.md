@@ -20,10 +20,6 @@ Tauri serializes all IPC payloads as JSON. For most UI operations this is fine. 
 
 <sub>Rust-side encode/decode only. 32-byte structs (i64 + 2&times;f64 + 2&times;u32), AMD Ryzen / Linux 6.8, `cargo bench`. Full source in [`benches/throughput.rs`](crates/tauri-wire/benches/throughput.rs). JS-side decode via `DataView` is not benchmarked here but avoids `JSON.parse()` entirely.</sub>
 
-`requestAnimationFrame` syncs to the display's refresh rate. On **Windows** (WebView2) and **Android**, this means 144 Hz, 240 Hz, etc. &mdash; your frame budget shrinks to 6.9 ms or 4.2 ms respectively. On **macOS/iOS** (WKWebView), `requestAnimationFrame` is currently **capped at 60 fps** regardless of ProMotion display capabilities ([tauri#13978](https://github.com/tauri-apps/tauri/issues/13978), [WebKit#173434](https://bugs.webkit.org/show_bug.cgi?id=173434)). On **Linux** (WebKitGTK), it typically runs at 60 fps.
-
-Even at 60 Hz (16.6 ms budget), `JSON.parse()` on a 5 KB payload takes 0.5-2 ms. At 144 Hz that's 7-29% of your frame budget gone on parsing alone. `DataView` reads on the same data are near-instant &mdash; no parsing, just typed reads at known offsets.
-
 ### The gap this fills
 
 Tauri v2 provides the raw binary pipes &mdash; [`ipc::Response`](https://docs.rs/tauri/latest/tauri/ipc/struct.Response.html) for returning `Vec<u8>`, and [`Channel`](https://docs.rs/tauri/latest/tauri/ipc/struct.Channel.html) for push-based streaming. What it does **not** provide is a codec layer on top: framing, sequencing, batching, and a matching JS decoder. That is what `tauri-wire` is.
@@ -63,7 +59,7 @@ flowchart TB
     subgraph JS["TypeScript (webview)"]
         F --> G["FrameIterator"]
         G -->|"for...of"| H["Frame"]
-        H -->|"readF64() readI64() readU32() ..."| I["Your UI @ 60 fps"]
+        H -->|"readF64() readI64() readU32() ..."| I["Your UI"]
     end
 
     style Rust fill:#1a1a2e,stroke:#e94560,color:#eee

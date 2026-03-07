@@ -8,7 +8,7 @@ This file helps AI coding assistants (Claude, Copilot, Cursor, etc.) understand 
 
 `tauri-wire` is a **wire codec** — a framing + serialization layer for streaming binary data over Tauri's IPC. It is NOT an IPC transport itself. Tauri provides the pipe (`ipc::Response`, `Channel`); this crate provides the format of what goes through it.
 
-Think of it as a lightweight alternative to Protocol Buffers or SBE, purpose-built for the "Rust backend → webview frontend" use case. Note: WebView2 (Windows) supports high refresh rates (144Hz+), but WKWebView (macOS/iOS) caps `requestAnimationFrame` at 60fps regardless of display.
+Think of it as a lightweight alternative to Protocol Buffers or SBE, purpose-built for the "Rust backend → webview frontend" use case.
 
 ## Architecture
 
