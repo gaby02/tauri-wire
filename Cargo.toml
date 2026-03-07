@@ -1,0 +1,3 @@
+[workspace]
+members = ["crates/tauri-wire", "crates/tauri-wire-derive"]
+resolver = "2"

@@ -1,0 +1,34 @@
+{
+  "name": "@tauri-wire/decoder",
+  "version": "0.1.0",
+  "description": "Zero-parse binary frame decoder for tauri-wire streams",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "main": "decoder.js",
+  "types": "decoder.d.ts",
+  "exports": {
+    ".": {
+      "import": "./decoder.js",
+      "types": "./decoder.d.ts"
+    }
+  },
+  "files": [
+    "decoder.ts",
+    "decoder.js",
+    "decoder.d.ts"
+  ],
+  "keywords": [
+    "tauri",
+    "binary",
+    "ipc",
+    "decoder",
+    "wire-protocol"
+  ],
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit"
+  }
+}

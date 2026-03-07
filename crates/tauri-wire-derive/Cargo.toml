@@ -1,0 +1,15 @@
+[package]
+name = "tauri-wire-derive"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+description = "Derive macro for tauri-wire WireMessage trait"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2.0.117", features = ["full"] }
+quote = "1.0.45"
+proc-macro2 = "1.0.106"

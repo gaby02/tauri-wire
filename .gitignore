@@ -1,0 +1,7 @@
+/target
+Cargo.lock
+node_modules/
+*.d.ts
+dist/
+*.js
+!crates/tauri-wire/ts/decoder.ts
