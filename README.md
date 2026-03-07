@@ -20,7 +20,9 @@ Tauri serializes all IPC payloads as JSON. For most UI operations this is fine. 
 
 <sub>Rust-side encode/decode only. 32-byte structs (i64 + 2&times;f64 + 2&times;u32), AMD Ryzen / Linux 6.8, `cargo bench`. Full source in [`benches/throughput.rs`](crates/tauri-wire/benches/throughput.rs). JS-side decode via `DataView` is not benchmarked here but avoids `JSON.parse()` entirely.</sub>
 
-`requestAnimationFrame` syncs to the display's refresh rate &mdash; 60 Hz gives you 16.6 ms per frame, 144 Hz gives 6.9 ms, 200 Hz gives 5 ms. `JSON.parse()` on a 5 KB payload in the webview typically takes 0.5-2 ms &mdash; that's fine at 60 Hz but eats 20-40% of your budget at 200 Hz. `DataView` reads on 3 KB of binary are near-instant by comparison &mdash; the JS side does no parsing, just typed reads at known offsets.
+`requestAnimationFrame` syncs to the display's refresh rate. On **Windows** (WebView2) and **Android**, this means 144 Hz, 240 Hz, etc. &mdash; your frame budget shrinks to 6.9 ms or 4.2 ms respectively. On **macOS/iOS** (WKWebView), `requestAnimationFrame` is currently **capped at 60 fps** regardless of ProMotion display capabilities ([tauri#13978](https://github.com/tauri-apps/tauri/issues/13978), [WebKit#173434](https://bugs.webkit.org/show_bug.cgi?id=173434)). On **Linux** (WebKitGTK), it typically runs at 60 fps.
+
+Even at 60 Hz (16.6 ms budget), `JSON.parse()` on a 5 KB payload takes 0.5-2 ms. At 144 Hz that's 7-29% of your frame budget gone on parsing alone. `DataView` reads on the same data are near-instant &mdash; no parsing, just typed reads at known offsets.
 
 ### The gap this fills
 
