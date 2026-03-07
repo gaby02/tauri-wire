@@ -20,7 +20,7 @@ Tauri serializes all IPC payloads as JSON. For most UI operations this is fine. 
 
 <sub>Rust-side encode/decode only. 32-byte structs (i64 + 2&times;f64 + 2&times;u32), AMD Ryzen / Linux 6.8, `cargo bench`. Full source in [`benches/throughput.rs`](crates/tauri-wire/benches/throughput.rs). JS-side decode via `DataView` is not benchmarked here but avoids `JSON.parse()` entirely.</sub>
 
-At 60 fps you have a 16.6 ms frame budget. `JSON.parse()` on a 5 KB payload in the webview typically takes 0.5-2 ms. `DataView` reads on 3 KB of binary are near-instant by comparison &mdash; the JS side does no parsing, just typed reads at known offsets.
+`requestAnimationFrame` syncs to the display's refresh rate &mdash; 60 Hz gives you 16.6 ms per frame, 144 Hz gives 6.9 ms, 200 Hz gives 5 ms. `JSON.parse()` on a 5 KB payload in the webview typically takes 0.5-2 ms &mdash; that's fine at 60 Hz but eats 20-40% of your budget at 200 Hz. `DataView` reads on 3 KB of binary are near-instant by comparison &mdash; the JS side does no parsing, just typed reads at known offsets.
 
 ### The gap this fills
 
