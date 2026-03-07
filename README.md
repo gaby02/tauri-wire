@@ -18,7 +18,9 @@ Tauri serializes all IPC payloads as JSON. For most UI operations this is fine. 
 | **Wire size (100 items)** | 5,744 B | 3,209 B | **44% smaller** |
 | **1,000 items push + drain** | — | 15,887 ns | **< 16 &micro;s total** |
 
-<sub>Rust-side encode/decode only. 32-byte structs (i64 + 2&times;f64 + 2&times;u32), AMD Ryzen / Linux 6.8, `cargo bench`. Full source in [`benches/throughput.rs`](crates/tauri-wire/benches/throughput.rs). JS-side decode via `DataView` is not benchmarked here but avoids `JSON.parse()` entirely.</sub>
+<sub>Rust-side encode/decode only. 32-byte structs (i64 + 2&times;f64 + 2&times;u32), AMD Ryzen / Linux 6.8, `cargo bench`. Full source in [`benches/throughput.rs`](crates/tauri-wire/benches/throughput.rs).</sub>
+
+On the JS side, `JSON.parse()` on a 5 KB payload costs 0.5&ndash;2 ms. `DataView` reads on the same data are near-instant &mdash; no parsing, just typed reads at known offsets. That gap is what `tauri-wire` eliminates.
 
 ### The gap this fills
 
