@@ -6,7 +6,7 @@ rust-version = "1.85"
 license = "MIT OR Apache-2.0"
 description = "Zero-parse binary wire protocol for Tauri IPC. Streaming, generic, transport-agnostic."
 readme = "../../README.md"
-repository = "https://github.com/user/tauri-wire"
+repository = "https://github.com/userFRM/tauri-wire"
 keywords = ["tauri", "ipc", "binary", "streaming", "wire-protocol"]
 categories = ["gui", "encoding", "network-programming"]
 
