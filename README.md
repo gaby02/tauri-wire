@@ -45,28 +45,25 @@ This is a known gap. Relevant upstream discussions:
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph Rust["Rust (any thread)"]
-        direction TB
-        A["Your data struct"] -->|"WireMessage::encode()"| B["Binary payload\n(LE bytes)"]
-        B --> C["Frame\n9B header + payload"]
+        A["Your data struct"] -->|"WireMessage::encode()"| B["Binary payload<br/>(LE bytes)"]
+        B --> C["Frame<br/>9B header + payload"]
     end
 
     subgraph Buffer["StreamBuffer"]
-        direction TB
-        C -->|"push() / push_one()"| D["Accumulated\nframes"]
-        D -->|"drain()"| E["Vec &lt;u8&gt;"]
+        C -->|"push() / push_one()"| D["Accumulated frames"]
+        D -->|"drain()"| E["Vec‹u8›"]
     end
 
     subgraph Transport["Transport"]
-        E -->|"ipc::Response\nChannel\nWebSocket"| F["Raw bytes"]
+        E -->|"ipc::Response / Channel / WebSocket"| F["Raw bytes"]
     end
 
     subgraph JS["TypeScript (webview)"]
-        direction TB
         F --> G["FrameIterator"]
         G -->|"for...of"| H["Frame"]
-        H -->|"readF64() readI64()\nreadU32() ..."| I["Your UI\n@ 60 fps"]
+        H -->|"readF64() readI64() readU32() ..."| I["Your UI @ 60 fps"]
     end
 
     style Rust fill:#1a1a2e,stroke:#e94560,color:#eee
